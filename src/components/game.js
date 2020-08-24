@@ -17,8 +17,8 @@ function Game() {
 
 	const handleClick = (i) => {
 		console.log(gameState);
-		const history = gameState.history.slice(0, gameState.stepNumber + 1);
-		const current = history[history.length - 1];
+		const history = gameState.history;//.slice(0, gameState.stepNumber + 1);
+		const current = history[gameState.stepNumber];
 		const squares = current.squares.slice();
 		if (squares[i] || calculateWinner(squares) || gameState.stepNumber >= 9) {
 			return;
@@ -54,7 +54,7 @@ function Game() {
 	function jumpTo(step) {
 		const jumpToState = {
 			...gameState,
-			history: gameState.history.slice(0, step + 1),
+//			history: gameState.history.slice(0, step + 1),
 			stepNumber: step,
 			xIsNext: step % 2 === 0,
 			status: `Next player: ${step % 2 === 0 ? 'X' : 'O'}`,
@@ -75,7 +75,7 @@ function Game() {
 		<div>
 			<div className="game-board">
 				<Board
-					squares={gameState.history[gameState.history.length - 1].squares}
+					squares={gameState.history[gameState.stepNumber].squares}
 					onClick={(i) => handleClick(i)}
 				/>
 			</div>
