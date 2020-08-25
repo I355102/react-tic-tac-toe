@@ -17,7 +17,7 @@ function Game() {
 
 	const handleClick = (i) => {
 		console.log(gameState);
-		const history = gameState.history;//.slice(0, gameState.stepNumber + 1);
+		const history = gameState.history; //.slice(0, gameState.stepNumber + 1);
 		const current = history[gameState.stepNumber];
 		const squares = current.squares.slice();
 		if (squares[i] || calculateWinner(squares) || gameState.stepNumber >= 9) {
@@ -30,6 +30,7 @@ function Game() {
 			// status = `Winner: ${winner}`;
 			const newGameState = {
 				...gameState,
+				stepNumber: gameState.history.length,
 				history: newHistory,
 				status: `Winner: ${winner}`,
 			};
@@ -54,7 +55,7 @@ function Game() {
 	function jumpTo(step) {
 		const jumpToState = {
 			...gameState,
-//			history: gameState.history.slice(0, step + 1),
+			//			history: gameState.history.slice(0, step + 1),
 			stepNumber: step,
 			xIsNext: step % 2 === 0,
 			status: `Next player: ${step % 2 === 0 ? 'X' : 'O'}`,
